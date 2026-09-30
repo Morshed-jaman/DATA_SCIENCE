@@ -1,0 +1,2 @@
+mean_A_seconds,mean_B_seconds,absolute_difference_seconds,percentage_increase,difference_direction,test_name,p_value,ci_95_low_seconds,ci_95_high_seconds,statistically_significant
+99.66307400758029,126.25848606376579,26.595412056185495,26.685321841630802,UI_B minus UI_A,Welch,1.7982722711480738e-64,23.54318756315852,29.64763654921247,True

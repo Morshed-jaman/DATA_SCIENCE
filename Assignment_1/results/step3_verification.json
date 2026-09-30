@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "source_and_descriptive_sha256_unchanged": {
+    "ui_ab_testing_data.csv": "5fdd83f7abf63f58e4dd3bef9c5ed1bb4d28cbaeea903bd07edc395e11e4e96a",
+    "A_B_Testing_Hypothesis_Testing_Assignment.docx": "6e65a1e21097616bd0a736f18660f4f334f84aa9a9988af80f7675ef50bd127a",
+    "results/descriptive_statistics.csv": "c5a727cb462442462aad4c884474ba52b160f3e918639274fd6931f47904f258"
+  },
+  "executed_notebook_code_cells": 9,
+  "embedded_figures": 4,
+  "script_notebook_normality_agreement": true,
+  "shapiro_warning_captured": true,
+  "all_four_figures_visually_inspected": true
+}

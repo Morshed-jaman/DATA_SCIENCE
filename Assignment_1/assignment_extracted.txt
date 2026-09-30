@@ -1,0 +1,147 @@
+﻿PART: word/document.xml
+A/B Testing Assignment: Hypothesis Testing using t-test
+Comparing Two User Interfaces (UI_A vs UI_B)
+1. ASSIGNMENT OVERVIEW
+Objective:
+Learn to use statistical hypothesis testing (specifically independent samples t-test) to determine whether one user interface significantly outperforms another based on quantitative metrics.
+Real-World Scenario:
+Your company deployed two different mobile app interfaces (UI_A and UI_B) to different user groups. You need to determine which UI provides significantly better user experience. Rather than relying on simple averages, you will use rigorous statistical hypothesis testing to validate your conclusions.
+Learning Outcomes:
+• Understand normal distribution assumption and how to validate it
+• Perform independent samples t-test correctly
+• Interpret p-values and confidence intervals
+• Make data-driven business decisions
+• Calculate and analyze probability scenarios
+• Create professional statistical visualizations
+2. DATASET DESCRIPTION
+File: ui_ab_testing_data.csv
+Size: 10,000 user session records (approximately 50% per UI version)
+Data Columns:
+Column Name
+Description
+Data Type
+user_id
+Unique identifier for each session (1-10000)
+Integer
+ui_version
+Which UI shown: UI_A or UI_B
+String
+Timestamp
+When session occurred
+DateTime
+session_duration_seconds
+How long user spent in app (TARGET METRIC for t-test)
+Float
+pages_visited
+Number of pages/screens viewed
+Integer
+Clicks
+Total number of interactions
+Integer
+errors_encountered
+Number of errors/bugs experienced
+Integer
+Conversion
+Completed desired action (1=yes, 0=no)
+Binary
+Bounce
+Left without interaction (1=yes, 0=no)
+Binary
+Focus Metric:
+You will perform a t-test on SESSION DURATION (session_duration_seconds). This continuous variable measures user engagement and is ideal for t-test analysis.
+Summary Statistics (Preview):
+Metric
+UI_A
+UI_B
+Difference
+Sample Size
+5,013
+4,987
+—
+Mean Duration
+99.66 sec
+126.26 sec
++26.60 sec
+Std Deviation
+68.45 sec
+71.23 sec
+—
+3. STEP-BY-STEP INSTRUCTIONS
+STEP 1: Load and Explore the Data
+• Load the CSV file into a spreadsheet (Excel, Google Sheets, or Python pandas)
+• Display first 10 rows
+• Count total records: Should be 10,001 (1 header + 10,000 data rows)
+• Separate data into two groups: UI_A (5,013 records) and UI_B (4,987 records)
+• Extract session_duration_seconds for each UI version
+What to document: Sample sizes, basic descriptive statistics (mean, min, max, standard deviation) for each UI
+STEP 2: Validate Normal Distribution Assumption
+The t-test assumes that data in each group is normally distributed. You MUST validate this before performing the test.
+Method A: Create Histograms
+• Create a histogram of session_duration_seconds for UI_A with 20-30 bins
+• Create a histogram of session_duration_seconds for UI_B with 20-30 bins
+• Observe: Does the shape approximate a bell curve (normal distribution)?
+• Note: Some skewness is acceptable with large sample sizes (n > 5000)
+What to look for: Approximately bell-shaped curves, relatively symmetric around the mean
+Method B: Create Q-Q Plots (Quantile-Quantile Plots)
+• Create Q-Q plot for UI_A: Compares data quantiles against theoretical normal distribution
+• Create Q-Q plot for UI_B
+• Interpret: Points close to diagonal line = normal distribution; deviation = non-normal
+What to look for: Points close to the diagonal reference line
+Method C: Shapiro-Wilk Test (Statistical Test for Normality)
+Hypotheses for normality test:
+• H₀: Data IS normally distributed
+• H₁: Data is NOT normally distributed
+Interpret results:
+• If p-value > 0.05: CANNOT reject H₀ → Assume data is normal ✓
+• If p-value < 0.05: REJECT H₀ → Data is NOT normal, consider Welch's t-test or transformation
+Note: With large sample sizes (n > 5000), Shapiro-Wilk may reject normality even for approximately normal data. Visual inspection (histograms/Q-Q plots) is more informative.
+What to document: Histograms, Q-Q plots, Shapiro-Wilk p-values, and your interpretation of normality
+STEP 3: Perform Independent Samples t-test
+Hypotheses:
+• H₀ (Null): Mean session duration is EQUAL for both UIs (μ₁ = μ₂)
+• H₁ (Alternative): Mean session durations are DIFFERENT (μ₁ ≠ μ₂)
+Assumptions to Check:
+• Normality: Both groups approximately normal (verified in Step 2)
+• Independence: Each observation is independent (data collection method ensures this)
+• Equal Variances: Optional to check – Levene's test (p > 0.05 = equal variances)
+Test Procedure:
+• Calculate mean and standard deviation for each group
+• If equal variances: Use Student's t-test
+• If unequal variances: Use Welch's t-test (more conservative)
+• Calculate t-statistic and p-value (two-tailed test)
+• Use significance level α = 0.05
+Interpretation:
+• If p-value < 0.05: REJECT H₀ → Session durations ARE significantly different
+• If p-value ≥ 0.05: FAIL TO REJECT H₀ → No significant difference
+What to document: t-statistic, p-value, degrees of freedom, confidence interval (95%), and conclusion
+4. PROBABILITY SCENARIOS AND ADDITIONAL ANALYSIS
+Answer the following probability and statistical questions based on your t-test results and the data:
+Scenario 1: Probability of Extreme Values
+• What is the probability that a randomly selected session in UI_A lasts longer than the mean duration of UI_B?
+• Use the normal distribution and standard deviation of UI_A to calculate this
+• Formula: P(X > UI_B_mean) using UI_A distribution
+Scenario 2: Probability Distributions
+• Using the sample statistics, calculate:
+• P(UI_A duration < 80 seconds) = ?
+• P(UI_B duration > 150 seconds) = ?
+• P(80 < UI_A < 120) = ?
+• Use z-scores and standard normal distribution table or Python scipy.stats.norm.cdf()
+Scenario 3: Business Impact Assessment
+• Calculate: What % increase in session duration does UI_B provide?
+• Is this increase statistically significant? (p < 0.05)
+TABLE 1 (explicit row/cell structure)
+Column Name | Description | Data Type
+user_id | Unique identifier for each session (1-10000) | Integer
+ui_version | Which UI shown: UI_A or UI_B | String
+Timestamp | When session occurred | DateTime
+session_duration_seconds | How long user spent in app (TARGET METRIC for t-test) | Float
+pages_visited | Number of pages/screens viewed | Integer
+Clicks | Total number of interactions | Integer
+errors_encountered | Number of errors/bugs experienced | Integer
+Conversion | Completed desired action (1=yes, 0=no) | Binary
+Bounce | Left without interaction (1=yes, 0=no) | Binary
+TABLE 2 (explicit row/cell structure)
+Metric | UI_A | UI_B | Difference
+Sample Size | 5,013 | 4,987 | —
+Mean Duration | 99.66 sec | 126.26 sec | +26.60 sec
+Std Deviation | 68.45 sec | 71.23 sec | —

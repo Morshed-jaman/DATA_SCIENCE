@@ -1,0 +1,3 @@
+ui_version,count,sample_skewness,shapiro_W,shapiro_p_value,warning
+UI_A,5013,1.3673267247860421,0.8953515722864317,5.031548696828026e-50,"UserWarning: scipy.stats.shapiro: For N > 5000, computed p-value may not be accurate. Current N is 5013."
+UI_B,4987,1.368852643888581,0.9068918931148047,5.703986672182957e-48,

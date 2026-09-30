@@ -1,0 +1,12 @@
+[
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "6E65A1E21097616BD0A736F18660F4F334F84AA9A9988AF80F7675EF50BD127A",
+        "Path":  "D:\\CSE_21201016_BRAC\\DATA_SCIENCE\\ASSIGN1_sarwar\\A_B_Testing_Hypothesis_Testing_Assignment.docx"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "5FDD83F7ABF63F58E4DD3BEF9C5ED1BB4D28CBAEEA903BD07EDC395E11E4E96A",
+        "Path":  "D:\\CSE_21201016_BRAC\\DATA_SCIENCE\\ASSIGN1_sarwar\\ui_ab_testing_data.csv"
+    }
+]

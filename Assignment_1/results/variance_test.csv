@@ -1,0 +1,2 @@
+test_name,statistic,p_value,alpha,selected_test,reject_equal_variances
+Levene (median-centered / Brown-Forsythe),65.91929417443873,5.251520248864192e-16,0.05,Welch,True

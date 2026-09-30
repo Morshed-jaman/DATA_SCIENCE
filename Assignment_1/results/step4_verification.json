@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "unchanged_sha256": {
+    "ui_ab_testing_data.csv": "5fdd83f7abf63f58e4dd3bef9c5ed1bb4d28cbaeea903bd07edc395e11e4e96a",
+    "A_B_Testing_Hypothesis_Testing_Assignment.docx": "6e65a1e21097616bd0a736f18660f4f334f84aa9a9988af80f7675ef50bd127a",
+    "results\\descriptive_statistics.csv": "c5a727cb462442462aad4c884474ba52b160f3e918639274fd6931f47904f258",
+    "results\\normality_assessment.csv": "970d25e09cdaeaf29371681d55cc0a00003048c09b02eb6e24522e31778a7225",
+    "results\\normality_interpretation.md": "cf5a27d78e3e30321a16f5ba1a3109a74531923fe1055bf0c8a74fce0933939c",
+    "results\\step3_verification.json": "bc3fd4353cbf02e83edd510bb48ae5f2f2ee0494ba05d9a30323f721d29ea8b4",
+    "figures\\UI_A_histogram.png": "3a6646e189d810019be6012efaa0c501d66d790ca52de989e678ead32f0ed44f",
+    "figures\\UI_A_qq_plot.png": "abc7de987ed5ffc4e68b014628429359b1ab4da37eeacfd6926f21398fe0139f",
+    "figures\\UI_B_histogram.png": "ff1e4be91a7a7470e946749ac461a61083200ae4ff3068b62066349c7be692ec",
+    "figures\\UI_B_qq_plot.png": "48df9c46c14c21f1e5401356fe4f53b3fb8b405c4d1fa66ea5f0d4ed4eb68b5a"
+  },
+  "executed_notebook_code_cells": 12,
+  "script_execution": "PASS",
+  "fresh_project_kernel_execution": "PASS",
+  "script_notebook_manual_agreement": "PASS",
+  "p_value_relative_tolerance": 1e-10,
+  "p_value_absolute_tolerance": 0,
+  "positive_p_values_required": true
+}

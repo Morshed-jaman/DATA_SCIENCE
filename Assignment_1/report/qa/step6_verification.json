@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "docx_rendered_pages": 10,
+  "pdf_pages": 10,
+  "all_pages_visually_inspected": true,
+  "source_and_previous_analysis_sha256": {
+    "ui_ab_testing_data.csv": "5fdd83f7abf63f58e4dd3bef9c5ed1bb4d28cbaeea903bd07edc395e11e4e96a",
+    "A_B_Testing_Hypothesis_Testing_Assignment.docx": "6e65a1e21097616bd0a736f18660f4f334f84aa9a9988af80f7675ef50bd127a",
+    "AB_Testing_Assignment.ipynb": "5c1c7052b58442a2a568054b19114f8972517fbaae8cf01875523901fd01e878",
+    "scripts\\analyze_ab_testing.py": "c9515340aff328cef5d6a131af10699e39831bb35dcdf85a50b61e0ada61259f",
+    "results\\business_impact.csv": "640d6d977dbd93100f70fad7c896dfd887af2b1272f143c560d0050355f83c04",
+    "results\\descriptive_statistics.csv": "c5a727cb462442462aad4c884474ba52b160f3e918639274fd6931f47904f258",
+    "results\\hypothesis_test_interpretation.md": "cd8433add9848a187d71a171ea075f893f9dbbbd60f6ab226dc84b22f77d84de",
+    "results\\normality_assessment.csv": "970d25e09cdaeaf29371681d55cc0a00003048c09b02eb6e24522e31778a7225",
+    "results\\normality_interpretation.md": "cf5a27d78e3e30321a16f5ba1a3109a74531923fe1055bf0c8a74fce0933939c",
+    "results\\probability_and_business_interpretation.md": "1599b8938a9f44becc5e57bba9922e60e421eb79e20d0bd8d6bdfd99c0088c36",
+    "results\\probability_scenarios.csv": "206f28dcf8693cb9c90b582ee9f2b2f42d96c56749942958fa5404ea9bff7b5e",
+    "results\\step3_verification.json": "bc3fd4353cbf02e83edd510bb48ae5f2f2ee0494ba05d9a30323f721d29ea8b4",
+    "results\\step4_verification.json": "09eba8bf315f5b5d48e76e13ad9899c5769adbf2fea89092bdc94a4c8b218a49",
+    "results\\step5_verification.json": "41d707486f4e7f52c1a66ca79ee5b2b5c7c7827da65b675bcb5cf4d92405d388",
+    "results\\t_test_results.csv": "7443440cd0f71ebc228add76ecd68a1f2afca5291d361ce8cda9436eb70d6823",
+    "results\\variance_test.csv": "f85953fc6735309dbe11abd99065287dcb5547bb4e9eccf56acf1ccf1cb99950",
+    "figures\\UI_A_histogram.png": "3a6646e189d810019be6012efaa0c501d66d790ca52de989e678ead32f0ed44f",
+    "figures\\UI_A_qq_plot.png": "abc7de987ed5ffc4e68b014628429359b1ab4da37eeacfd6926f21398fe0139f",
+    "figures\\UI_B_histogram.png": "ff1e4be91a7a7470e946749ac461a61083200ae4ff3068b62066349c7be692ec",
+    "figures\\UI_B_qq_plot.png": "48df9c46c14c21f1e5401356fe4f53b3fb8b405c4d1fa66ea5f0d4ed4eb68b5a"
+  },
+  "report_sha256": {
+    "AB_Testing_Assignment_Report.docx": "bab04a61b0cd6bfec19824e02bddc1ef256d9eed1e50e137d51f3d552d610a8d",
+    "AB_Testing_Assignment_Report.pdf": "664cd55cf6481803db2f8239a32bf0dd1caad2c0f9b8f696c1cae609cbf11f34"
+  },
+  "step7_final_audit_performed": false
+}

@@ -1,0 +1,403 @@
+A/B TESTING  |  SESSION DURATION
+Page 1
+A/B Testing and Hypothesis Testing
+Comparing Session Duration for UI_A and UI_B
+Name: ____________________    Student ID: ____________________
+Course: ___________________    Section: _______________________
+1. Objective and hypotheses
+Compare population mean session duration between the two mobile-app interfaces. The target metric is 
+session_duration_seconds, measured in seconds. All differences are defined as UI_B minus UI_A. Retain 
+every observation without transformations.
+H ₀: μB − μA = 0     H ₁: μB − μA ≠ 0     α = 0.05 (two- sided )
+2. Data exploration
+The supplied CSV contains 10,000 session records and 9 columns (10,001 records including the header). 
+The first ten rows appear in Appendix A.
+CSV column
+Description
+Type
+user_id
+Session identifier
+Integer
+ui_version
+Interface shown: UI_A or UI_B
+String
+timestamp
+Session date and time; loaded as text
+Date/time text
+session_duration_
+seconds
+Session length; target metric, seconds
+Float
+pages_visited
+Pages/screens viewed
+Integer
+clicks
+Total interactions
+Integer
+errors_encountered
+Errors or bugs experienced
+Integer
+conversion
+Desired action completed: 1=yes, 0=no
+Binary
+bounce
+Left without interaction: 1=yes, 0=no
+Binary
+Column names above preserve CSV capitalization. The assignment capitalizes four headers differently; the analysis 
+uses the actual CSV names.
+
+A/B TESTING  |  SESSION DURATION
+Page 2
+2.1 Data quality and descriptive statistics
+Data-quality checks: missing cells = 0; duplicate rows = 0; duplicate user ids = 0; unexpected ui labels = 0; 
+non numeric or nonfinite durations = 0; nonpositive durations = 0.
+Every column has zero missing values. No records were removed, imputed, or transformed. Distinct 
+session IDs do not demonstrate independent users or observations.
+Statistic
+UI_A
+UI_B
+Sample size
+5,013
+4,987
+Mean (seconds)
+99.6631
+126.2585
+Sample SD (seconds)
+71.5636
+83.6444
+Minimum (seconds)
+1.6100
+2.2500
+25th percentile (seconds)
+47.6700
+65.7350
+Median (seconds)
+81.8100
+109.1500
+75th percentile (seconds)
+133.5300
+167.3500
+Maximum (seconds)
+525.9500
+666.5100
+Sample SD uses ddof=1; quartiles use linear interpolation. SD describes variation among individual 
+durations. Standard error describes uncertainty in an estimated mean (SD/√n under independence). 
+These quantities are not interchangeable.
+The assignment preview lists SDs of 68.45 and 71.23 seconds, whereas the CSV yields 71.5636 and 
+83.6444. Counts and rounded means match. All calculations use the CSV.
+3. Normality assessment
+Group
+n
+Skewness¹
+Shapiro W
+p-value
+UI_A
+5013
+1.367327
+0.895352
+5.031549e-50
+UI_B
+4987
+1.368853
+0.906892
+5.703987e-48
+¹ Sample skewness uses bias=False. Shapiro H₀: normal distribution; H₁: non-normal. Both p-values are below 0.05, 
+supporting rejection. A large p-value would not prove normality.
+
+A/B TESTING  |  SESSION DURATION
+Page 3
+3.1 Histograms of individual durations
+Figure 1. UI_A: 25 bins; a clear right tail and asymmetric concentration at shorter durations.
+Figure 2. UI_B: the same 25 bin boundaries and axis limits. The distribution is right-skewed and extends farther to 
+the right.
+Both are unimodal but not symmetric bell shapes. All observations, including extreme durations, remain 
+visible in the full-range plots.
+
+A/B TESTING  |  SESSION DURATION
+Page 4
+3.2 Normal Q-Q plots and inference
+Figure 3. UI_A normal probability plot (scipy.stats.probplot), with its fitted reference line.
+Figure 4. UI_B normal probability plot, with its fitted reference line. Both show systematic curvature and large 
+upper-tail departures.
+The lower tails lie above the fitted lines, central portions tend below them, and upper tails rise sharply 
+above them. Positive skewness corroborates these departures.
+
+A/B TESTING  |  SESSION DURATION
+Page 5
+3.3 Normality limitations and assumptions
+UI_A uses all 5,013 observations. SciPy issued the following warning; no subsampling was performed:
+UserWarning: scipy.stats.shapiro: For N > 5000, computed p-value may not be accurate. Current N is 
+5013.
+For more than 5,000 observations, SciPy documents that W remains accurate but the p-value may not. 
+Treat its precise magnitude cautiously. UI_B has 4,987 observations and did not trigger this warning. 
+Large samples make normality tests sensitive, but the observed curvature and skewness also show 
+substantial non-normality [1].
+The distribution of individual durations is not the sampling distribution of a mean. Under independence 
+and finite population variances, large samples support approximate mean inference even with non-
+normal raw data. Independence is assumed from the assignment scenario; unique IDs do not establish 
+it. Large samples do not repair dependence or biased sampling. Welch addresses unequal variances, not 
+raw-data normality.
+4. Variance assessment and Welch test
+Median-centered Levene (Brown-Forsythe) gives statistic 65.919294, p = 5.25152025e-16. It is robust to 
+departures from normality, especially skewness [2]. The assignment rule selects Welch because p < 0.05. 
+A non-significant result would not prove equal variances; preliminary variance-based selection is data-
+dependent and can affect overall error properties.
+Let mA, mB be sample means; sA, sB sample SDs; and nA, nB sample sizes. Define vA = sA²/nA and vB = 
+sB²/nB.
+SE = √(vB + vA);   t = (mB − mA)/ SE
+df = (vB + vA)² / [ vB ² /(nB − 1) + vA² /(nA − 1)]
+p = 2 × t . sf (|t | , df )
+CI ₉₅ = (mB − mA) ± t . ppf (0.975 , df ) × SE
+vB = 83.64436110²/4987 = 1.4029234298; vA = 71.56361982²/5013 = 1.0216141396.
+SE = √(1.4029234298 + 1.0216141396) = 1.55709267 seconds. t = (126.25848606 − 
+99.66307401)/1.55709267 = 17.08017297.
+df = (1.40292343 + 1.02161414)² / [1.40292343²/4986 + 1.02161414²/5012] = 9748.82914022.
+
+A/B TESTING  |  SESSION DURATION
+Page 6
+4.1 Test results and interpretation
+Welch result: UI_B minus UI_A
+Value
+Mean difference (seconds)
+26.59541206
+Standard error (seconds)
+1.55709267
+t-statistic
+17.08017297
+Degrees of freedom
+9748.82914022
+Two-sided p-value
+1.79827227e-64
+95% CI (seconds)
+[23.54318756, 29.64763655]
+Decision at α = 0.05
+Reject H0
+CI = 26.59541206 ± 1.96020735 × 1.55709267 = [23.54318756, 29.64763655] seconds.
+Reject H₀. UI_B has a higher estimated mean duration by 26.5954 seconds. The confidence interval 
+excludes zero. The p-value describes tail extremeness under H₀ and the model; it is not the probability 
+that H₀ is true. Statistical significance does not by itself establish business value.
+The raw-data SciPy test uses UI_B first, UI_A second, equal_var=False, and a two-sided alternative [3]. 
+Independent summary-statistic formulas agree with SciPy, including its confidence interval. Tiny p-
+values were checked with relative tolerance 1e-10, absolute tolerance zero, and positivity assertions; 
+the script and notebook also agree.
+5. Required normal-model probability scenarios
+XA ~ Normal(mA , sA²);   XB ~ Normal(mB , sB ²)
+mA = 99.66307401, sA = 71.56361982; mB = 126.25848606, sB = 83.64436110 seconds. Use individual-
+session SDs, not standard errors. All displayed substitutions are rounded only for readability.
+These are the normal-model approximations required by the assignment. Both raw distributions are 
+right-skewed and non-normal; large samples do not make individual durations normal. The requested 
+model is not truncated, even though it allows negative theoretical durations. Empirical comparisons are 
+reported separately.
+
+A/B TESTING  |  SESSION DURATION
+Page 7
+5.1 Worked probability answers
+(a) P(XA > mB)
+A UI_A session exceeds the UI_B sample mean.
+zlower = (126.25848606 − 99.66307401) / 71.56361982 = 0.37163313.
+1 − Φ(z) = norm.sf(0.37163313) = 0.35508301 = 35.5083%.
+Under this model, about 35.51% of individual UI_A sessions satisfy the event.
+UI_B’s full-precision sample mean is a fixed threshold here. This is not P(XA > XB).
+(b) P(XA < 80)
+A UI_A session lasts less than 80 seconds.
+zupper = (80.00000000 − 99.66307401) / 71.56361982 = -0.27476355.
+Φ(z) = norm.cdf(-0.27476355) = 0.39174895 = 39.1749%.
+Under this model, about 39.17% of individual UI_A sessions satisfy the event.
+(c) P(XB > 150)
+A UI_B session lasts more than 150 seconds.
+zlower = (150.00000000 − 126.25848606) / 83.64436110 = 0.28383879.
+1 − Φ(z) = norm.sf(0.28383879) = 0.38826696 = 38.8267%.
+Under this model, about 38.83% of individual UI_B sessions satisfy the event.
+(d) P(80 < XA < 120)
+A UI_A session lasts strictly between 80 and 120 seconds.
+zlower = (80.00000000 − 99.66307401) / 71.56361982 = -0.27476355.
+zupper = (120.00000000 − 99.66307401) / 71.56361982 = 0.28417967.
+Φ(zupper) − Φ(zlower) = Φ(0.28417967) − Φ(-0.27476355) = 0.22011470 = 22.0115%.
+Under this model, about 22.01% of individual UI_A sessions satisfy the event.
+
+A/B TESTING  |  SESSION DURATION
+Page 8
+5.2 Supplementary empirical comparison
+Observed proportions use the matching group denominator, strict inequalities, and the full-precision 
+UI_B mean for (a). These sample proportions supplement, rather than replace, the required normal-
+model answers.
+Event
+Count / n
+Observed proportion
+Observed %
+Model %
+P(XA > mB)
+1405/5013
+0.280271
+28.0271
+35.5083
+P(XA < 80)
+2448/5013
+0.488330
+48.8330
+39.1749
+P(XB > 150)
+1542/4987
+0.309204
+30.9204
+38.8267
+P(80 < XA < 120)
+1057/5013
+0.210852
+21.0852
+22.0115
+The normal approximation differs from the empirical distribution: right skew changes the allocation of 
+mass around the thresholds and in the tails. Empirical rates describe this sample, not exact population 
+probabilities. The strongest mismatches occur in (a), (b), and (c).
+6. Business impact and conclusion
+Absolute difference = mB − mA
+= 126.25848606 − 99.66307401 = 26.59541206 seconds.
+Relative increase (%) = 100 × (mB − mA)/ mA
+= 100 × (126.25848606 − 99.66307401) / 99.66307401 = 26.685322%.
+This is a relative percentage increase in mean session duration, not a change in percentage points. The 
+verified Welch result is statistically significant (p = 1.79827227e-64); its 95% interval for UI_B minus UI_A 
+is [23.543188, 29.647637] seconds.
+If longer engagement is the business objective, UI_B is a candidate for adoption, conditional on practical 
+value, costs, and checks of relevant outcomes. Longer sessions alone do not prove better usability, 
+satisfaction, conversion, or revenue; they may also reflect friction. The evidence establishes a difference 
+in mean duration under the stated assumptions, not a universal improvement in user experience.
+
+A/B TESTING  |  SESSION DURATION
+Page 9
+7. Reproducibility and sources
+Supplied sources: A_B_Testing_Hypothesis_Testing_Assignment.docx and ui_ab_testing_data.csv. 
+Original files remain unchanged. Numeric tables and substitutions in this report are loaded from the 
+verified analysis outputs; figures are the previously inspected exports.
+From the project folder, follow README.md to use the Python 3.13.1 .venv and requirements.txt. Run 
+the analysis script, then the full notebook in a fresh project kernel. Finally run the report builder. The 
+accompanying notebook and script retain full code; this report presents methods and findings.
+.\.venv\Scripts\python.exe scripts\analyze_ab_testing.py
+.\.venv\Scripts\python.exe scripts\execute_notebook.py
+.\.venv\Scripts\python.exe scripts\build_report.py
+Saved analysis sources: descriptive_statistics.csv, normality_assessment.csv, variance_test.csv, 
+t_test_results.csv, probability_scenarios.csv, and business_impact.csv in results/. Full precision is 
+retained in those files; only reported displays are rounded. Tiny p-values use scientific notation.
+Checks include normal-probability z-score versus direct loc/scale calculations, strict empirical counts and 
+group denominators, probability bounds, and script/notebook/manual-formula agreement. Report 
+generation checks key values against the source CSV and saved results without replacing them.
+Documentation consulted
+[1] SciPy documentation. Shapiro-Wilk: sample-size warning.
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.shapiro.html
+[2] SciPy documentation. Levene: median-centered variance assessment.
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.levene.html
+[3] SciPy documentation. Independent t-test: Welch and confidence interval.
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html
+[4] SciPy documentation. Probability plots: normal quantiles and fitted line.
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.probplot.html
+The normal Q-Q visualizations use scipy.stats.probplot with normal quantiles and a fitted reference line 
+[4]. No external datasets or invented references are used.
+
+A/B TESTING  |  SESSION DURATION
+Page 10
+Appendix A. First ten CSV records
+All nine columns are shown in their original row order. Short display headers are mapped below to the exact CSV names; all durations are in 
+seconds.
+user_id
+UI
+timestamp
+Duration
+(seconds)
+Pages
+Clicks
+Errors
+Conversion
+Bounce
+1
+UI_A
+15-01-24 2:46
+50.43
+2
+5
+1
+0
+0
+2
+UI_B
+20-01-24 23:28
+8.71
+9
+6
+0
+0
+0
+3
+UI_A
+04-01-24 19:54
+88.4
+4
+4
+0
+0
+0
+4
+UI_A
+20-01-24 22:06
+91.6
+3
+4
+0
+1
+0
+5
+UI_A
+27-01-24 5:12
+240.79
+3
+3
+1
+0
+0
+6
+UI_B
+20-01-24 20:59
+138.44
+3
+3
+0
+0
+1
+7
+UI_A
+11-01-24 6:35
+54.03
+4
+8
+1
+0
+0
+8
+UI_A
+10-01-24 1:37
+17.28
+3
+7
+0
+0
+0
+9
+UI_A
+03-01-24 20:41
+76.78
+3
+8
+0
+0
+1
+10
+UI_B
+29-01-24 22:09
+141.43
+4
+4
+1
+0
+0
+UI = ui_version; Duration = session_duration_seconds; Pages = pages_visited; Clicks = clicks; Errors = errors_encountered; Conversion = conversion; Bounce = 
+bounce. user_id and timestamp retain their original names.
+The timestamp is displayed exactly as loaded. Conversion and bounce are binary indicators defined in Section 2. Their business outcomes were 
+not analyzed in this assignment.
