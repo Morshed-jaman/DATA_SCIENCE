@@ -13,3 +13,18 @@ Comparison of session durations for UI_A and UI_B, including normality diagnosti
 The original assignment and CSV, analysis scripts, results, figures, and audit evidence are included. Local Python environments and rendering tools are excluded. Report personal fields remain blank.
 
 After cloning, run commands from `Assignment_1/`. Replace the original machine's `Set-Location` path in the assignment README with your local checkout path. Audit files record the completed local audit before this GitHub publication.
+
+## Housing Prediction API
+
+A FastAPI service that predicts a California housing value using the features in this order: `med_inc`, `house_age`, `ave_rooms`, `ave_bedrms`.
+
+- [API source, model, and Dockerfile](housing-api/)
+
+Build and run it from the repository root:
+
+```powershell
+docker build -t mjaman/housing-api:latest .\housing-api
+docker run -d --name housing-api -p 8000:8000 mjaman/housing-api:latest
+```
+
+Open `http://localhost:8000/docs` to try the prediction endpoint.
